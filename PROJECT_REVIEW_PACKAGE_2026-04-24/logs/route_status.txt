@@ -1,0 +1,8 @@
+200 https://theguradio.com/
+404 https://theguradio.com/review-home/
+200 https://theguradio.com/archive/
+200 https://theguradio.com/performances/
+200 https://theguradio.com/history/
+200 https://theguradio.com/search/
+200 https://theguradio.com/history-topic/timeline/
+404 https://theguradio.com/history-topic/venue-legacy/

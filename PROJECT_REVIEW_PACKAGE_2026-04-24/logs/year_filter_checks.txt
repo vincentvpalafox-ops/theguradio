@@ -1,0 +1,4 @@
+﻿https://theguradio.com/archive/?gu_scene_year=2023 -> 200
+https://theguradio.com/archive/?year=2023 -> 301 https://theguradio.com/archive/?gu_scene_year=2023
+https://theguradio.com/history/?gu_scene_year=2024 -> 200
+https://theguradio.com/performances/?gu_scene_year=2024 -> 200

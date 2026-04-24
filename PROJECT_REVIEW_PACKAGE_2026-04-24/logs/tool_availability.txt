@@ -1,0 +1,5 @@
+php: NOT FOUND
+npm: C:\Program Files\nodejs\npm.ps1
+node: C:\Program Files\nodejs\node.exe
+composer: NOT FOUND
+git: C:\Program Files\Git\cmd\git.exe

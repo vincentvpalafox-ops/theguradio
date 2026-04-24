@@ -1,0 +1,59 @@
+{
+  "project_name": "The Gallatin Underground / GU Scene Archive",
+  "review_date": "2026-04-24",
+  "repo_branch": "main",
+  "version_or_phase": "WordPress archive/search rollout, post-pass 0023, pre-final-homepage activation",
+  "overall_status": "Partial production build",
+  "estimated_completion_percent": 63,
+  "frontend_completion_percent": 60,
+  "backend_completion_percent": 68,
+  "data_completion_percent": 55,
+  "documentation_completion_percent": 78,
+  "qa_completion_percent": 32,
+  "deployment_readiness_percent": 58,
+  "major_features": [
+    "Public performances archive",
+    "Public archive records archive",
+    "Public history archive",
+    "Internal-first search route",
+    "Homepage/archive section shortcodes",
+    "Maintenance and operator dashboards",
+    "Promotion workflow",
+    "YouTube provider integration",
+    "MEC event fallback section"
+  ],
+  "major_routes": [
+    "/",
+    "/archive/",
+    "/performances/",
+    "/history/",
+    "/search/",
+    "/history-topic/{slug}",
+    "/archive/{slug}",
+    "/performances/{slug}"
+  ],
+  "known_blockers": [
+    "Public homepage is not yet the intended archive-backed front door",
+    "Repo is not the authoritative source of live project state",
+    "No automated test/build pipeline exists",
+    "SoundCloud and Spotify providers are scaffolded only",
+    "Local PHP CLI is unavailable"
+  ],
+  "highest_risks": [
+    "Manual deployment drift",
+    "Split source of truth between repo and live WordPress data",
+    "Thin archive/history content coverage",
+    "Search expectations exceeding provider reality",
+    "Documentation and repo hygiene drift"
+  ],
+  "recommended_next_step": "Activate the archive-backed homepage on the public / route and verify it against the current live archive/history/performance system.",
+  "files_to_review_first": [
+    "GU_MASTER_PLATFORM_PACKAGE/00_READ_ME_FIRST.md",
+    "GU_MASTER_PLATFORM_PACKAGE/01_MASTER_PLATFORM_DIRECTION.md",
+    "staged_remote_changes/wp-content/plugins/gu-scene-archive/includes/class-gu-scene-archive-plugin.php",
+    "staged_remote_changes/wp-content/plugins/gu-scene-archive/includes/class-gu-scene-archive-content.php",
+    "staged_remote_changes/wp-content/plugins/gu-scene-archive/includes/class-gu-scene-archive-template-controller.php",
+    "staged_remote_changes/wp-content/plugins/gu-scene-archive/includes/class-gu-scene-archive-section-shortcodes.php",
+    "staged_remote_changes/wp-content/plugins/gu-scene-archive/includes/class-gu-scene-archive-search-service.php"
+  ]
+}

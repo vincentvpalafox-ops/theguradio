@@ -1,0 +1,1 @@
+PASS: no tracked diff whitespace errors reported by git diff --check
