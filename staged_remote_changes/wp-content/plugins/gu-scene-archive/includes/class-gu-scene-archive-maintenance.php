@@ -45,6 +45,7 @@ class GU_Scene_Archive_Maintenance {
                     'last_taxonomy_normalization_summary' => array(),
                     'last_homepage_archive_metadata_normalization_at' => '',
                     'last_homepage_archive_metadata_normalization_summary' => array(),
+                    'last_homepage_archive_metadata_normalization_details' => array(),
                     'last_cache_clear_at' => '',
                 )
             ),
@@ -60,6 +61,7 @@ class GU_Scene_Archive_Maintenance {
                 'last_taxonomy_normalization_summary' => array(),
                 'last_homepage_archive_metadata_normalization_at' => '',
                 'last_homepage_archive_metadata_normalization_summary' => array(),
+                'last_homepage_archive_metadata_normalization_details' => array(),
                 'last_cache_clear_at' => '',
             )
         );
@@ -76,6 +78,7 @@ class GU_Scene_Archive_Maintenance {
         $collision_summary = isset($state['last_taxonomy_collision_summary']) && is_array($state['last_taxonomy_collision_summary']) ? $state['last_taxonomy_collision_summary'] : array();
         $normalization_summary = isset($state['last_taxonomy_normalization_summary']) && is_array($state['last_taxonomy_normalization_summary']) ? $state['last_taxonomy_normalization_summary'] : array();
         $homepage_metadata_summary = isset($state['last_homepage_archive_metadata_normalization_summary']) && is_array($state['last_homepage_archive_metadata_normalization_summary']) ? $state['last_homepage_archive_metadata_normalization_summary'] : array();
+        $homepage_metadata_details = isset($state['last_homepage_archive_metadata_normalization_details']) && is_array($state['last_homepage_archive_metadata_normalization_details']) ? $state['last_homepage_archive_metadata_normalization_details'] : array();
         ?>
         <hr>
         <h2>Maintenance Tools</h2>
@@ -199,6 +202,12 @@ class GU_Scene_Archive_Maintenance {
             ); ?>
         <?php endif; ?>
 
+        <?php if (! empty($homepage_metadata_details)) : ?>
+            <h3>Homepage Archive Metadata Review</h3>
+            <p>These are the exact homepage-supporting archive records considered during the last normalization run and whether each one was changed or left evidence-blocked.</p>
+            <?php self::render_homepage_metadata_detail_table($homepage_metadata_details); ?>
+        <?php endif; ?>
+
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom: 20px;">
             <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
                 <?php wp_nonce_field('gu_scene_archive_run_validation'); ?>
@@ -297,11 +306,12 @@ class GU_Scene_Archive_Maintenance {
         }
 
         check_admin_referer('gu_scene_archive_normalize_homepage_archive_metadata');
-        $summary = $this->normalize_homepage_archive_metadata();
+        $result = $this->normalize_homepage_archive_metadata();
 
         $state = self::get_state();
         $state['last_homepage_archive_metadata_normalization_at'] = current_time('mysql', true);
-        $state['last_homepage_archive_metadata_normalization_summary'] = $summary;
+        $state['last_homepage_archive_metadata_normalization_summary'] = isset($result['summary']) && is_array($result['summary']) ? $result['summary'] : array();
+        $state['last_homepage_archive_metadata_normalization_details'] = isset($result['details']) && is_array($result['details']) ? $result['details'] : array();
         update_option(self::STATE_OPTION, $state, false);
 
         $this->run_archive_audit();
@@ -369,6 +379,39 @@ class GU_Scene_Archive_Maintenance {
                         <td><?php echo esc_html(isset($collision['canonical_name']) ? $collision['canonical_name'] : ''); ?></td>
                         <td><?php echo esc_html(implode(', ', isset($collision['merge_names']) ? (array) $collision['merge_names'] : array())); ?></td>
                         <td><?php echo esc_html((string) (isset($collision['term_count']) ? $collision['term_count'] : 0)); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php
+    }
+
+    private static function render_homepage_metadata_detail_table($details) {
+        ?>
+        <table class="widefat striped" style="max-width: 1180px; margin: 0 0 24px;">
+            <thead>
+                <tr>
+                    <th>Record</th>
+                    <th>Homepage Role</th>
+                    <th>Source Result</th>
+                    <th>History Topic Result</th>
+                    <th>Host Evidence</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ((array) $details as $detail) : ?>
+                    <tr>
+                        <td>
+                            <?php if (! empty($detail['edit_url'])) : ?>
+                                <a href="<?php echo esc_url((string) $detail['edit_url']); ?>"><?php echo esc_html(isset($detail['title']) ? (string) $detail['title'] : 'Untitled'); ?></a>
+                            <?php else : ?>
+                                <?php echo esc_html(isset($detail['title']) ? (string) $detail['title'] : 'Untitled'); ?>
+                            <?php endif; ?>
+                        </td>
+                        <td><?php echo esc_html(isset($detail['homepage_role']) ? (string) $detail['homepage_role'] : ''); ?></td>
+                        <td><?php echo esc_html(isset($detail['source_result']) ? (string) $detail['source_result'] : ''); ?></td>
+                        <td><?php echo esc_html(isset($detail['history_result']) ? (string) $detail['history_result'] : ''); ?></td>
+                        <td><?php echo esc_html(isset($detail['host_evidence']) ? (string) $detail['host_evidence'] : ''); ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -813,6 +856,7 @@ class GU_Scene_Archive_Maintenance {
             'source_skipped_unknown_host' => 0,
             'history_topic_evidence_blocked' => 0,
         );
+        $details = array();
 
         foreach ((array) $query->posts as $post_id) {
             $post_id = (int) $post_id;
@@ -827,37 +871,58 @@ class GU_Scene_Archive_Maintenance {
             ++$summary['records_considered'];
             $updated = false;
             $source_terms = $this->get_post_term_slugs($post_id, 'scene_source');
+            $original_url = trim((string) get_post_meta($post_id, 'gu_original_url', true));
+            $host_evidence = $this->extract_host_for_reporting($original_url);
+            $source_result = '';
+            $history_result = $is_history ? 'History topic present' : 'Not a history record';
 
             if (! empty($source_terms)) {
                 ++$summary['source_skipped_existing'];
+                $source_result = 'Already had source label';
             } else {
-                $original_url = trim((string) get_post_meta($post_id, 'gu_original_url', true));
-
                 if ('' === $original_url || ! wp_http_validate_url($original_url)) {
                     ++$summary['source_skipped_no_url'];
+                    $source_result = 'Blocked: missing or invalid source URL';
                 } else {
                     $source_term = $this->infer_supported_source_term_from_url($original_url);
 
                     if ('' === $source_term) {
                         ++$summary['source_skipped_unknown_host'];
+                        $source_result = 'Blocked: unsupported source host';
                     } else {
                         wp_set_object_terms($post_id, array($source_term), 'scene_source', true);
                         ++$summary['source_backfills'];
                         $updated = true;
+                        $source_result = sprintf('Backfilled source label: %s', $source_term);
                     }
                 }
             }
 
             if ($is_history && empty($this->get_post_term_slugs($post_id, 'history_topic'))) {
                 ++$summary['history_topic_evidence_blocked'];
+                $history_result = 'Evidence-blocked: missing history topic';
+            } elseif ($is_history) {
+                $history_result = 'History topic present';
             }
 
             if ($updated) {
                 ++$summary['records_updated'];
             }
+
+            $details[] = array(
+                'title' => get_the_title($post_id),
+                'edit_url' => get_edit_post_link($post_id, 'url'),
+                'homepage_role' => $this->build_homepage_archive_role_label($is_featured, $is_history),
+                'source_result' => $source_result,
+                'history_result' => $history_result,
+                'host_evidence' => '' !== $host_evidence ? $host_evidence : 'No canonical source host',
+            );
         }
 
-        return $summary;
+        return array(
+            'summary' => $summary,
+            'details' => $details,
+        );
     }
 
     private function validate_record($post_id) {
@@ -1076,6 +1141,34 @@ class GU_Scene_Archive_Maintenance {
         }
 
         return '';
+    }
+
+    private function build_homepage_archive_role_label($is_featured, $is_history) {
+        $roles = array();
+
+        if ($is_featured) {
+            $roles[] = 'Featured archive';
+        }
+
+        if ($is_history) {
+            $roles[] = 'History support';
+        }
+
+        if (empty($roles)) {
+            return 'Homepage support';
+        }
+
+        return implode(' + ', $roles);
+    }
+
+    private function extract_host_for_reporting($url) {
+        $host = wp_parse_url($url, PHP_URL_HOST);
+
+        if (! is_string($host) || '' === $host) {
+            return '';
+        }
+
+        return strtolower(preg_replace('/^www\./', '', $host));
     }
 
     private function host_matches($host, $suffixes) {

@@ -1,0 +1,21 @@
+# 03 PRODUCT NOTES
+
+- What changed in actual product behavior:
+  - no public site behavior changed
+  - after deployment and one admin run, operators will be able to see record-by-record outcomes for homepage archive metadata normalization
+- System impact:
+  - the homepage archive metadata workflow is now inspectable instead of summary-only
+  - operators will be able to tell exactly which records were updated, skipped, or left evidence-blocked
+- What the owner should review directly:
+  - after deployment, the `gu-scene-archive` maintenance screen
+  - the new `Homepage Archive Metadata Review` table after one normalization run
+- Visible UI/UX changes, if any:
+  - admin-only review table in the maintenance screen
+  - no public UI changes
+- User-flow impact, if any:
+  - none for public visitors
+  - lower ambiguity for admin operators running the homepage archive metadata step
+- Known rough edges still visible:
+  - the action still does not guess `history_topic`
+  - the review table only becomes useful after the maintenance action is run at least once on a deployed build
+  - this pass does not resolve live/local drift or deploy the file
