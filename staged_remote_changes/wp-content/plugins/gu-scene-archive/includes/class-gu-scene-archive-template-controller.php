@@ -146,6 +146,11 @@ class GU_Scene_Archive_Template_Controller {
 
         if ($this->is_history_request()) {
             $this->mark_virtual_route_as_found();
+            return;
+        }
+
+        if ($this->should_404_empty_history_topic_route()) {
+            $this->render_404_response();
         }
     }
 
@@ -293,6 +298,46 @@ class GU_Scene_Archive_Template_Controller {
         }
 
         exit;
+    }
+
+    private function should_404_empty_history_topic_route() {
+        if (! is_tax('history_topic')) {
+            return false;
+        }
+
+        $term = get_queried_object();
+
+        if (! ($term instanceof WP_Term)) {
+            return false;
+        }
+
+        return ! $this->history_topic_has_public_records($term);
+    }
+
+    private function history_topic_has_public_records(WP_Term $term) {
+        $query = new WP_Query(
+            array(
+                'post_type' => 'archive_item',
+                'post_status' => 'publish',
+                'posts_per_page' => 1,
+                'fields' => 'ids',
+                'no_found_rows' => true,
+                'ignore_sticky_posts' => true,
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'history_topic',
+                        'field' => 'term_id',
+                        'terms' => array((int) $term->term_id),
+                    ),
+                ),
+                'meta_query' => array(
+                    'relation' => 'AND',
+                    GU_Scene_Archive_Record_Manager::build_public_visibility_meta_query(),
+                ),
+            )
+        );
+
+        return $query->have_posts();
     }
 
     private function build_tax_query($map) {
