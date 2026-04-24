@@ -5,6 +5,8 @@ if (! defined('ABSPATH')) {
 }
 
 class GU_Scene_Archive_Template_Controller {
+    const YEAR_FILTER_QUERY_VAR = 'gu_scene_year';
+
     public function __construct() {
         add_action('init', array($this, 'register_routes'));
         add_action('pre_get_posts', array($this, 'filter_archive_queries'));
@@ -26,6 +28,7 @@ class GU_Scene_Archive_Template_Controller {
     public function register_query_vars($vars) {
         $vars[] = 'gu_scene_review_home';
         $vars[] = 'gu_scene_history';
+        $vars[] = self::YEAR_FILTER_QUERY_VAR;
         return $vars;
     }
 
@@ -135,6 +138,10 @@ class GU_Scene_Archive_Template_Controller {
     }
 
     public function handle_virtual_routes() {
+        if ($this->maybe_redirect_legacy_year_filter()) {
+            return;
+        }
+
         if ($this->is_review_home_request()) {
             if (! $this->can_access_review_home()) {
                 $this->render_404_response();
@@ -167,7 +174,7 @@ class GU_Scene_Archive_Template_Controller {
                     'artist' => 'scene_artist',
                     'venue' => 'scene_venue',
                     'source' => 'scene_source',
-                    'year' => 'scene_year',
+                    self::YEAR_FILTER_QUERY_VAR => 'scene_year',
                 )
             );
 
@@ -189,7 +196,7 @@ class GU_Scene_Archive_Template_Controller {
             $tax_query = $this->build_tax_query(
                 array(
                     'area' => 'scene_area',
-                    'year' => 'scene_year',
+                    self::YEAR_FILTER_QUERY_VAR => 'scene_year',
                     'archive_type' => 'archive_type',
                     'history_topic' => 'history_topic',
                 )
@@ -269,6 +276,31 @@ class GU_Scene_Archive_Template_Controller {
         return ! empty(GU_Scene_Archive_Settings::get('index_scene_archive_publicly'));
     }
 
+    private function maybe_redirect_legacy_year_filter() {
+        if (empty($_GET['year']) || ! empty($_GET[self::YEAR_FILTER_QUERY_VAR])) {
+            return false;
+        }
+
+        if (! $this->is_archive_filter_route_request()) {
+            return false;
+        }
+
+        $scene_year = sanitize_title(wp_unslash($_GET['year']));
+
+        if ('' === $scene_year) {
+            return false;
+        }
+
+        $query_args = wp_unslash($_GET);
+        unset($query_args['year']);
+        $query_args[self::YEAR_FILTER_QUERY_VAR] = $scene_year;
+
+        $redirect_url = add_query_arg($query_args, $this->get_current_request_url());
+
+        wp_safe_redirect($redirect_url, 301);
+        exit;
+    }
+
     private function mark_virtual_route_as_found() {
         global $wp_query;
 
@@ -338,6 +370,44 @@ class GU_Scene_Archive_Template_Controller {
         );
 
         return $query->have_posts();
+    }
+
+    private function is_archive_filter_route_request() {
+        $request_path = $this->get_current_request_path();
+
+        if ('' === $request_path) {
+            return false;
+        }
+
+        foreach (array('archive', 'performances', 'history', 'history-topic') as $prefix) {
+            if ($prefix === $request_path || 0 === strpos($request_path, $prefix . '/')) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function get_current_request_url() {
+        $request_path = $this->get_current_request_path();
+
+        if ('' === $request_path) {
+            return home_url('/');
+        }
+
+        return home_url('/' . $request_path . '/');
+    }
+
+    private function get_current_request_path() {
+        $home_path = trim((string) wp_parse_url(home_url('/'), PHP_URL_PATH), '/');
+        $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) wp_unslash($_SERVER['REQUEST_URI']) : '';
+        $request_path = trim((string) wp_parse_url($request_uri, PHP_URL_PATH), '/');
+
+        if ($home_path && $request_path && 0 === strpos($request_path, $home_path . '/')) {
+            $request_path = trim(substr($request_path, strlen($home_path)), '/');
+        }
+
+        return $request_path;
     }
 
     private function build_tax_query($map) {
