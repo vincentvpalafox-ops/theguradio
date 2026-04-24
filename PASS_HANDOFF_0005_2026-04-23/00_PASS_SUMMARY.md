@@ -1,0 +1,21 @@
+# 00 PASS SUMMARY
+
+- Pass number: `0005`
+- Project name: `The Gallatin Underground`
+- Repo / branch worked on: `main`
+- Date: `2026-04-23`
+- Bounded objective of this pass: add a maintenance-path normalization step for homepage-supporting archive metadata so provable source labels can be backfilled without guessing public content or redesigning the homepage
+- What was actually completed:
+  - added an admin-only maintenance action to normalize homepage-supporting archive metadata
+  - scoped the new normalization to `archive_item` records that support homepage archive/history sections
+  - backfill logic now adds `scene_source` only when it can be proven from the canonical source URL host
+  - missing `history_topic` values on history-class archive items are now counted and reported as evidence-blocked instead of being guessed
+  - added maintenance-state tracking and admin summary output for this new normalization pass
+  - created a new standard handoff package for ChatGPT review
+- What was intentionally not touched:
+  - live record metadata
+  - public homepage or `review-home` layout
+  - public copy/excerpts
+  - search/provider behavior
+  - non-homepage archive records outside the maintenance query
+- Current pass judgment: `completed with issues`

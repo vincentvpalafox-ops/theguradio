@@ -1,0 +1,22 @@
+# 03 PRODUCT NOTES
+
+- What changed in actual product behavior:
+  - no public site behavior changed in this workspace
+  - after deployment, the WordPress maintenance screen will gain one new admin-only action: `Normalize Homepage Archive Metadata`
+- System impact:
+  - creates a code-side path to execute the accepted metadata-cleanup scope without inventing public content
+  - backfills `scene_source` only from provable source hosts
+  - leaves missing `history_topic` values untouched and reports them as evidence-blocked
+- What the owner should review directly:
+  - after deployment, the maintenance panel for the `gu-scene-archive` plugin
+  - the new summary block showing source-label backfills versus evidence-blocked history-topic gaps
+- Visible UI/UX changes, if any:
+  - admin-only maintenance button and summary section
+  - no public UI change
+- User-flow impact, if any:
+  - none for public visitors
+  - admin operators get a smaller, safer maintenance step for homepage-supporting archive metadata
+- Known rough edges still visible:
+  - this pass does not guess `history_topic`
+  - this pass does not backfill thumbnails or rewrite excerpts
+  - this pass is not live until the modified plugin file is deployed to the production site
