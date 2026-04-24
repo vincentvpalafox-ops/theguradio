@@ -1,0 +1,23 @@
+# 04 BLOCKERS AND RISKS
+
+- Active blockers:
+  - no reusable authenticated deployment mechanism was discoverable in the workspace or environment
+  - the previously referenced public helper endpoints are not available live as of `2026-04-23`:
+    - `https://theguradio.com/gu-opcache-reset.php`
+    - `https://theguradio.com/gu-litespeed-purge.php`
+    - `https://theguradio.com/gu-direct-write.php`
+    - `https://theguradio.com/gu-js-uploader.php`
+  - no local `php` CLI is available for syntax linting or local execution checks
+- Known risks introduced or still unresolved:
+  - the maintenance review table has still not been rendered in a live admin session
+  - the normalization action has still not been run against production archive records
+  - historical deploy artifacts in `staged_remote_changes/tmp` appear stale and cannot be treated as an active workflow
+  - earlier live/local drift remains unresolved because this pass could not reach deployment
+- Was project drift observed:
+  - no scope drift in this pass
+  - yes, operational drift remains between documented prior deployment artifacts and the current live environment
+- Did architectural questions surface:
+  - no new architecture questions surfaced
+  - the blocker is operational deployment access, not plugin structure
+- Did scope pressure appear:
+  - no; the pass stayed inside the already-accepted deployment-and-verification scope
