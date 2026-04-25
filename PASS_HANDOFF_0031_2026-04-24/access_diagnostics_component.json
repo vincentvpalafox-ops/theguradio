@@ -1,0 +1,89 @@
+﻿{
+    "generated_at":  "2026-04-24T18:17:05",
+    "routes":  {
+                   "home":  {
+                                "url":  "https://theguradio.com/",
+                                "status_code":  200
+                            },
+                   "preview":  {
+                                   "url":  "https://theguradio.com/archive-homepage-preview/",
+                                   "status_code":  404
+                               }
+               },
+    "ssh_probe":  {
+                      "target":  "thegalla@theguradio.com",
+                      "exit_code":  255,
+                      "output":  "thegalla@theguradio.com: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password)."
+                  },
+    "chrome_main_process":  {
+                                "process_id":  36420,
+                                "command_line":  "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --profile-directory=Profile 1 --restore-last-session "
+                            },
+    "chrome_debug_ports":  [
+
+                           ],
+    "chrome_recent_session":  {
+                                  "files":  [
+                                                {
+                                                    "name":  "Session_13421308494453436",
+                                                    "last_write_time":  "2026-04-21T23:15:45",
+                                                    "length":  516947
+                                                },
+                                                {
+                                                    "name":  "Tabs_13421308492498441",
+                                                    "last_write_time":  "2026-04-21T23:14:52",
+                                                    "length":  756829
+                                                }
+                                            ],
+                                  "urls":  [
+                                               "http://peak.theguradio.com/",
+                                               "http://theguradio.com/",
+                                               "https://peak.theguradio.com",
+                                               "https://peak.theguradio.com/",
+                                               "https://peak.theguradio.com/partners",
+                                               "https://peak.theguradio.com/partners?category=all\u0026state=MT\u0026county=Garfield\u0026scope=surrounding\u0026subcategory=concrete\u0026q=\u0026per_page=100\u0026sort=county\u0026completeness=\u0026verification=",
+                                               "https://peak.theguradio.com/region-command",
+                                               "https://search.google.com/search-console/removals?resource_id=sc-domain%3Atheguradio.com",
+                                               "https://search.google.com/search-console/sitemaps/info-drilldown?resource_id=sc-domain:theguradio.com\u0026sitemap=https:%2F%2Ftheguradio.com%2F%3Ffeed%3Dxmlsitemap316",
+                                               "https://search.google.com/search-console/sitemaps/info-drilldown?resource_id=sc-domain:theguradio.com\u0026sitemap=https:%2F%2Ftheguradio.com%2F%3Ffeed%3Dxmlsitemap547",
+                                               "https://search.google.com/search-console/sitemaps?resource_id=sc-domain%3Atheguradio.com",
+                                               "https://theguradio.com",
+                                               "https://theguradio.com/",
+                                               "https://theguradio.com/about-us/",
+                                               "https://theguradio.com/about-us/#",
+                                               "https://theguradio.com/joinus",
+                                               "https://theguradio.com/joinus/",
+                                               "https://theguradio.com/wp-admin/",
+                                               "https://theguradio.com/wp-admin/0",
+                                               "https://theguradio.com/wp-admin/admin.php?page=gu-scene-archive-display",
+                                               "https://theguradio.com/wp-admin/admin.php?page=gu-scene-archive-preview",
+                                               "https://theguradio.com/wp-admin/admin.php?page=gu-scene-archive-preview\u0026gu_preview_q=bozeman\u0026gu_preview_area\u0026gu_preview_genre\u0026gu_preview_year\u0026gu_preview_source",
+                                               "https://theguradio.com/wp-admin/admin.php?page=gu-scene-archive-preview\u0026gu_preview_q=bozeman\u0026gu_preview_area=\u0026gu_preview_genre=\u0026gu_preview_year=\u0026gu_preview_source=",
+                                               "https://theguradio.com/wp-admin/admin.php?page=gu-scene-archive-preview\u0026gu_preview_q=bozeman+live+music\u0026gu_preview_area\u0026gu_preview_genre\u0026gu_preview_year\u0026gu_preview_source",
+                                               "https://theguradio.com/wp-admin/admin.php?page=gu-scene-archive-preview\u0026gu_preview_q=bozeman+live+music\u0026gu_preview_area=\u0026gu_preview_genre=\u0026gu_preview_year=\u0026gu_preview_source=",
+                                               "https://theguradio.com/wp-admin/admin.php?page=gu-scene-archive-preview\u0026gu_preview_q=montana+live+band\u0026gu_preview_area\u0026gu_preview_genre\u0026gu_preview_year\u0026gu_preview_source",
+                                               "https://theguradio.com/wp-admin/admin.php?page=gu-scene-archive-preview\u0026gu_preview_q=montana+live+band\u0026gu_preview_area=\u0026gu_preview_genre=\u0026gu_preview_year=\u0026gu_preview_source=",
+                                               "https://theguradio.com/wp-admin/admin.php?page=gu-scene-archive-providers",
+                                               "https://theguradio.com/wp-admin/edit.php?post_type=page",
+                                               "https://theguradio.com/wp-admin/edit-comments.php",
+                                               "https://theguradio.com/wp-admin/options.php",
+                                               "https://theguradio.com/wp-admin/post.php?post=7127\u0026action=edit",
+                                               "https://theguradio.com/wp-admin/post.php?post=7127\u0026action=elementor",
+                                               "https://theguradio.com/wp-admin/site-editor.php",
+                                               "https://theguradio.com/wp-admin/site-editor.php?p=%2Fstyles",
+                                               "https://theguradio.com/wp-admin/themes.php",
+                                               "https://theguradio.com/wp-login.php?action=logout\u0026_wpnonce=5e75815a19",
+                                               "https://theguradio.com/wp-login.php?action=logout\u0026_wpnonce=ab765aaa41",
+                                               "https://theguradio.com/wp-login.php?action=logout\u0026_wpnonce=d17ffc0587",
+                                               "https://theguradio.com/wp-login.php?loggedout=true\u0026wp_lang=en_US-"
+                                           ]
+                              },
+    "credential_matches":  {
+                               "cmdkey_targets":  [
+
+                                                  ],
+                               "vault_resources":  [
+
+                                                   ]
+                           }
+}
