@@ -1,0 +1,85 @@
+﻿{
+    "generated_at":  "2026-04-24T18:00:01",
+    "candidate_count":  8,
+    "candidates":  [
+                       {
+                           "source_last_write_time":  "2026-04-21T23:22:20",
+                           "redacted_url":  "https://webhosting2021.is.cc:2083"
+                       },
+                       {
+                           "source_last_write_time":  "2026-04-21T23:16:23",
+                           "redacted_url":  "https://webhosting2021.is.cc:2083/"
+                       },
+                       {
+                           "source_last_write_time":  "2026-04-21T23:16:23",
+                           "redacted_url":  "https://webhosting2021.is.cc:2083/cpsess[redacted]/frontend/jupiter/domains/index.html"
+                       },
+                       {
+                           "source_last_write_time":  "2026-04-21T23:16:23",
+                           "redacted_url":  "https://webhosting2021.is.cc:2083/cpsess[redacted]/frontend/jupiter/domains/index.html#/"
+                       },
+                       {
+                           "source_last_write_time":  "2026-04-21T23:16:23",
+                           "redacted_url":  "https://webhosting2021.is.cc:2083/cpsess[redacted]/frontend/jupiter/filemanager/index.html"
+                       },
+                       {
+                           "source_last_write_time":  "2026-04-21T23:16:23",
+                           "redacted_url":  "https://webhosting2021.is.cc:2083/cpsess[redacted]/frontend/jupiter/index.html"
+                       },
+                       {
+                           "source_last_write_time":  "2026-04-21T23:22:20",
+                           "redacted_url":  "https://webhosting2021.is.cc:2083/cpsess[redacted]/frontend/jupiter/index.html?login=1\u0026post_login=31587430414717"
+                       },
+                       {
+                           "source_last_write_time":  "2026-04-21T23:16:23",
+                           "redacted_url":  "https://webhosting2021.is.cc:2083/cpsess[redacted]/frontend/jupiter/index.html?login=1\u0026post_login=92750679174797"
+                       }
+                   ],
+    "tested":  [
+                   {
+                       "source_last_write_time":  "2026-04-21T23:22:20",
+                       "redacted_url":  "https://webhosting2021.is.cc:2083",
+                       "final_status":  200,
+                       "title":  "cPanel Login",
+                       "has_login_form":  true,
+                       "has_filemanager":  false,
+                       "has_domains":  false
+                   },
+                   {
+                       "source_last_write_time":  "2026-04-21T23:16:23",
+                       "redacted_url":  "https://webhosting2021.is.cc:2083/",
+                       "final_status":  200,
+                       "title":  "cPanel Login",
+                       "has_login_form":  true,
+                       "has_filemanager":  false,
+                       "has_domains":  false
+                   },
+                   {
+                       "source_last_write_time":  "2026-04-21T23:16:23",
+                       "redacted_url":  "https://webhosting2021.is.cc:2083/cpsess[redacted]/frontend/jupiter/domains/index.html",
+                       "final_status":  200,
+                       "title":  "cPanel Login",
+                       "has_login_form":  true,
+                       "has_filemanager":  false,
+                       "has_domains":  false
+                   },
+                   {
+                       "source_last_write_time":  "2026-04-21T23:16:23",
+                       "redacted_url":  "https://webhosting2021.is.cc:2083/cpsess[redacted]/frontend/jupiter/domains/index.html#/",
+                       "final_status":  200,
+                       "title":  "cPanel Login",
+                       "has_login_form":  true,
+                       "has_filemanager":  false,
+                       "has_domains":  false
+                   },
+                   {
+                       "source_last_write_time":  "2026-04-21T23:16:23",
+                       "redacted_url":  "https://webhosting2021.is.cc:2083/cpsess[redacted]/frontend/jupiter/filemanager/index.html",
+                       "final_status":  200,
+                       "title":  "cPanel Login",
+                       "has_login_form":  true,
+                       "has_filemanager":  false,
+                       "has_domains":  false
+                   }
+               ]
+}
