@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-04-24T18:58:44",
+  "overall_pass": true,
+  "files": [
+    {
+      "file": "gu-homepage-preview-create-0028.php",
+      "exists": true,
+      "expected_hash": "8013166B91E2A0834EE45AA41E83CBA17F1114CEE16112320943A0BC6FB4BA85",
+      "actual_hash": "8013166B91E2A0834EE45AA41E83CBA17F1114CEE16112320943A0BC6FB4BA85",
+      "match": true
+    },
+    {
+      "file": "gu-homepage-preview-remove-0028.php",
+      "exists": true,
+      "expected_hash": "1A55FEAE7FA536A16CCD1695932454BBEEBE70D2FD3A5A3C0FE2B31AD3E92E1F",
+      "actual_hash": "1A55FEAE7FA536A16CCD1695932454BBEEBE70D2FD3A5A3C0FE2B31AD3E92E1F",
+      "match": true
+    },
+    {
+      "file": "Invoke-HomepagePreviewVerification.ps1",
+      "exists": true,
+      "expected_hash": "BBD4BBAE5FDA013FC210323407B91236C78932B5280C9014C932E4B87E3DBA69",
+      "actual_hash": "BBD4BBAE5FDA013FC210323407B91236C78932B5280C9014C932E4B87E3DBA69",
+      "match": true
+    },
+    {
+      "file": "Invoke-PreviewProofCapture.ps1",
+      "exists": true,
+      "expected_hash": "1B69FD526E3CA9193D5FBBB052FCEEE473AE46F0288DF602393BD928EB53E692",
+      "actual_hash": "1B69FD526E3CA9193D5FBBB052FCEEE473AE46F0288DF602393BD928EB53E692",
+      "match": true
+    }
+  ]
+}
