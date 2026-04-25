@@ -1,0 +1,22 @@
+﻿{
+    "generated_at":  "2026-04-25T12:31:36",
+    "preview_url":  "https://theguradio.com/archive-homepage-preview/",
+    "runner":  {
+                   "ok":  true,
+                   "action":  "created",
+                   "page_id":  23758,
+                   "page_url":  "https://theguradio.com/archive-homepage-preview/",
+                   "front_page_unchanged":  true,
+                   "self_deleted":  true,
+                   "page_url_matches_preview":  true,
+                   "runner_ok":  true
+               },
+    "verifier":  {
+                     "preview_status_code":  200,
+                     "preview_markers_ok":  true,
+                     "preview_disallowed_ok":  true,
+                     "routes_ok":  true,
+                     "overall_pass":  true
+                 },
+    "overall_pass":  true
+}

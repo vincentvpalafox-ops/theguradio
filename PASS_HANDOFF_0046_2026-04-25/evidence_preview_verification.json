@@ -1,0 +1,29 @@
+﻿{
+    "preview_url":  "https://theguradio.com/archive-homepage-preview/",
+    "preview_status_code":  200,
+    "preview_final_url":  "https://theguradio.com/archive-homepage-preview/",
+    "preview_markers":  {
+                            "gu_homepage":  true,
+                            "opening":  true,
+                            "performances":  true,
+                            "archive":  true,
+                            "history":  true,
+                            "community":  true,
+                            "closing":  true
+                        },
+    "preview_markers_ok":  true,
+    "preview_disallowed":  {
+                               "raw_shortcode_visible":  false,
+                               "private_review_visible":  false
+                           },
+    "preview_disallowed_ok":  true,
+    "routes":  {
+                   "home":  200,
+                   "archive":  200,
+                   "history":  200,
+                   "performances":  200,
+                   "search":  200
+               },
+    "routes_ok":  true,
+    "overall_pass":  true
+}
