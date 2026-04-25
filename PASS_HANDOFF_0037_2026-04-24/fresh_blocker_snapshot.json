@@ -1,0 +1,12 @@
+{
+  "generated_at": "2026-04-24T19:15:14",
+  "repo_head": "da1db3b",
+  "home_status_code": 200,
+  "preview_status_code": 404,
+  "ssh_available": false,
+  "cpanel_authenticated_surface_recovered": false,
+  "manual_reauth_required": true,
+  "workspace_only_paths_exhausted": true,
+  "proof_bundle_integrity_pass": true,
+  "recommended_next_action": "reauthenticate_to_hosting_and_execute_pass_0034_proof_bundle"
+}
