@@ -1,0 +1,10 @@
+{
+  "generated_at": "2026-04-24T19:20:29",
+  "repo_head": "c7cd607",
+  "home_status_code": 200,
+  "preview_status_code": 404,
+  "proof_bundle_integrity_pass": true,
+  "further_workspace_only_passes_admissible": false,
+  "blocking_condition": "manual_hosting_reauthentication_required",
+  "recommended_next_action": "reauthenticate_to_hosting_and_execute_pass_0034_proof_bundle"
+}
