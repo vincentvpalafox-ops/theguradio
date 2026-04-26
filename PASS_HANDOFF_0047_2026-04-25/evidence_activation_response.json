@@ -1,0 +1,13 @@
+{
+    "ok": true,
+    "activated_page_id": 23758,
+    "activated_page_slug": "archive-homepage-preview",
+    "activated_page_url": "https://theguradio.com/",
+    "page_on_front_before": 7127,
+    "page_on_front_after": 23758,
+    "show_on_front_before": "page",
+    "show_on_front_after": "page",
+    "rollback_page_on_front": 7127,
+    "rollback_show_on_front": "page",
+    "self_deleted": true
+}

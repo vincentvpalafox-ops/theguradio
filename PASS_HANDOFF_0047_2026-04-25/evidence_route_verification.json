@@ -1,0 +1,39 @@
+{
+  "home": {
+    "url": "https://theguradio.com/",
+    "status": 200
+  },
+  "archive": {
+    "url": "https://theguradio.com/archive/",
+    "status": 200
+  },
+  "performances": {
+    "url": "https://theguradio.com/performances/",
+    "status": 200
+  },
+  "history": {
+    "url": "https://theguradio.com/history/",
+    "status": 200
+  },
+  "search": {
+    "url": "https://theguradio.com/search/",
+    "status": 200
+  },
+  "archive_single": {
+    "url": "https://theguradio.com/archive/post-art-show/",
+    "status": 200
+  },
+  "performance_single": {
+    "url": "https://theguradio.com/performances/frequenseas-filling-station-bozeman/",
+    "status": 200
+  },
+  "review_home": {
+    "url": "https://theguradio.com/review-home/",
+    "status": 404
+  },
+  "preview_permalink": {
+    "url": "https://theguradio.com/archive-homepage-preview/",
+    "status": 301,
+    "location": "https://theguradio.com/"
+  }
+}
